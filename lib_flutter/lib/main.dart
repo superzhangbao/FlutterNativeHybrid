@@ -1,11 +1,9 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp(initParams: window.defaultRouteName));
+void main() => runApp(MyApp(initParams:window.defaultRouteName));
 
 class MyApp extends StatelessWidget {
   final String initParams;
@@ -55,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 showMessage = "BasicMessageChannel:" + message;
               });
-              return "收到Native消息：" + message;
+              return "我是flutter——收到Native BasicMessageChannel消息：" + message;
             }));
     super.initState();
   }
@@ -74,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         alignment: Alignment.topCenter,
-        decoration: BoxDecoration(color: Colors.lightBlueAccent),
+        decoration: BoxDecoration(color: Colors.deepOrange),
         margin: EdgeInsets.only(top: 70),
         child: Column(
           children: <Widget>[
@@ -122,10 +120,16 @@ class _MyHomePageState extends State<MyHomePage> {
     String response;
     try {
       if (_isMethodChannel) {
-        //使用MessageChannel接受来自native的消息，并向native回复
+        //使用MethodChannel接受来自native的消息，并向native回复
         response = await _methodChannel.invokeMethod("send", value);
+        setState(() {
+          showMessage = response;
+        });
       } else {
         response = await _basicMessageChannel.send(value);
+        setState(() {
+          showMessage = response;
+        });
       }
     } on PlatformException catch (e) {
       print(e);

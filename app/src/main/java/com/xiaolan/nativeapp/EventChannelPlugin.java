@@ -1,7 +1,7 @@
 package com.xiaolan.nativeapp;
 
+import io.flutter.embedding.engine.dart.DartExecutor;
 import io.flutter.plugin.common.EventChannel;
-import io.flutter.view.FlutterView;
 
 /**
  * author : zhangbao
@@ -14,7 +14,7 @@ import io.flutter.view.FlutterView;
 public class EventChannelPlugin implements EventChannel.StreamHandler {
     private EventChannel.EventSink eventSink;
 
-    static EventChannelPlugin registWith(FlutterView flutterView) {
+    static EventChannelPlugin registerWith(DartExecutor flutterView) {
         EventChannelPlugin eventChannelPlugin = new EventChannelPlugin();
         new EventChannel(flutterView,"EventChannelPlugin").setStreamHandler(eventChannelPlugin);
         return  eventChannelPlugin;

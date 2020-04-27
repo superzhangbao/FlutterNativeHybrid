@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //                )
 //                flutterEngine.navigationChannel.setInitialRoute("route1")
 //                flutterView.attachToFlutterEngine(flutterEngine)
-
+                val inputParams: String = et_input.text.toString().trim { it <= ' ' }
+                FlutterAppActivity.start(this@MainActivity, inputParams)
             }
         }
     }
