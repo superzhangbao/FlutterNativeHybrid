@@ -23,19 +23,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when(v?.id) {
             R.id.btn->{
                 // 通过FlutterView引入Flutter编写的页面
-                val flutterView = FlutterView(this)
-                val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT)
-                val flContainer: FrameLayout = findViewById(R.id.fl_container)
-                flContainer.addView(flutterView, lp)
-                // 关键代码，将Flutter页面显示到FlutterView中
-                val flutterEngine = FlutterEngine(this)
-                flutterEngine.dartExecutor.executeDartEntrypoint(
-                        DartExecutor.DartEntrypoint.createDefault()
-                )
-                flutterEngine.navigationChannel.setInitialRoute("route1")
-                flutterView.attachToFlutterEngine(flutterEngine)
+//                val flutterView = FlutterView(this)
+//                val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+//                        ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.MATCH_PARENT)
+//                val flContainer: FrameLayout = findViewById(R.id.fl_container)
+//                flContainer.addView(flutterView, lp)
+//                // 关键代码，将Flutter页面显示到FlutterView中
+//                val flutterEngine = FlutterEngine(this)
+//                flutterEngine.dartExecutor.executeDartEntrypoint(
+//                        DartExecutor.DartEntrypoint.createDefault()
+//                )
+//                flutterEngine.navigationChannel.setInitialRoute("route1")
+//                flutterView.attachToFlutterEngine(flutterEngine)
+
             }
         }
     }

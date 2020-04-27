@@ -19,13 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter 混合开发',initParams:initParams),
+      home: MyHomePage(title: 'Flutter 混合开发', initParams: initParams),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({Key key, this.initParams, this.title}) : super(key: key);
 
   final String initParams;
@@ -40,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static const MethodChannel _methodChannel =
       MethodChannel("MethodChannelPlugin");
   static const BasicMessageChannel<String> _basicMessageChannel =
-      const BasicMessageChannel("BasicMessageChannelPlugin", StringCodec());
+      BasicMessageChannel("BasicMessageChannelPlugin", StringCodec());
   String showMessage = "";
   StreamSubscription _streamSubscription;
   bool _isMethodChannel = false;
@@ -80,19 +79,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             SwitchListTile(
-                value: _isMethodChannel,
-                onChanged: _onChangeChannel,
-                title: Text(_isMethodChannel?"MethodChannelPlugin" : "BasicMessageChannelPlugin"),
+              value: _isMethodChannel,
+              onChanged: _onChangeChannel,
+              title: Text(_isMethodChannel
+                  ? "MethodChannelPlugin"
+                  : "BasicMessageChannelPlugin"),
             ),
             TextField(
               onChanged: _onTextChange,
               decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)
-                ),
+                    borderSide: BorderSide(color: Colors.white)),
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)
-                ),
+                    borderSide: BorderSide(color: Colors.white)),
               ),
             ),
             Text("收到初始化参数initParams:${widget.initParams}"),
@@ -113,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print(error);
   }
 
-  void _onChangeChannel(bool value){
+  void _onChangeChannel(bool value) {
     setState(() {
       _isMethodChannel = value;
     });
@@ -122,10 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onTextChange(value) async {
     String response;
     try {
-      if(_isMethodChannel) {
-            //使用MessageChannel接受来自native的消息，并向native回复
-            response = await _methodChannel.invokeMethod("send",value);
-          }else{
+      if (_isMethodChannel) {
+        //使用MessageChannel接受来自native的消息，并向native回复
+        response = await _methodChannel.invokeMethod("send", value);
+      } else {
         response = await _basicMessageChannel.send(value);
       }
     } on PlatformException catch (e) {
